@@ -36,6 +36,11 @@ $trace_logic
 
 TC=mc_cmds
 PING_OUT=/tmp/${TC}_out
+
+export TCID=$TC
+export TST_TOTAL=1
+export TST_COUNT=1
+
 # Set the LTPROOT variable to the correct path
 # from the ltp/testcases/bin directory or the
 # /ltp/testcases/network/multicast/mc_cmds directory
@@ -188,8 +193,8 @@ end_testcase()
    # Call other cleanup functions
    [ $CLEANUP = "ON" ] && do_cleanup
 
-   [ $# = 0 ] && { echo "Test Successful"; exit 0; }
-   echo "Test Failed: $@"
+   [ $# = 0 ] && { tst_resm TPASS "Test Successful"; exit 0; }
+   tst_resm TFAIL "Test Failed: $@"
    exit 1
 }
 
